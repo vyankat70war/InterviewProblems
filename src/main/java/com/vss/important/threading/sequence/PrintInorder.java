@@ -1,4 +1,4 @@
-package com.vss.important.threading;
+package com.vss.important.threading.sequence;
 
 public class PrintInorder {
 
@@ -29,11 +29,11 @@ public class PrintInorder {
 		public void run() {
 			try {
 				while (counter <= printUpto) {
+					int id = threadId % numberOfThreads;
+					if(id ==0) {
+						id = numberOfThreads;
+					}
 					synchronized (lock) {
-						int id = threadId % numberOfThreads;
-						if(id ==0) {
-							id = numberOfThreads;
-						}
 						if (id == nextThreadToRun) {
 							System.out.println("Thread " + threadId + " : " + counter);
 							counter++;
